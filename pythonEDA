@@ -1,0 +1,25 @@
+!pip install graphviz
+!pip install pydot
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn import datasets
+
+# Load the data
+df = pd.read_csv("D:\Data\Spring23\MLB1.csv")
+df.dropna(inplace=True)
+
+target = np.zeros((df.salary.size, df.salary.max() + 1))
+target[np.arange(df.salary.size), df.salary] = 1
+
+from sklearn import tree
+for i in range(1,100):
+    clf = tree.DecisionTreeRegressor(max_depth=i)
+    clf.fit(X_train,y_train)
+    print(i,mean_squared_error(y_test,clf.predict(X_test)))
+    
+    clf = tree.DecisionTreeClassifier()
+    clf = clf.fit(X_train, y_train)
+    
+    clf.predict(X_train, y_train)
